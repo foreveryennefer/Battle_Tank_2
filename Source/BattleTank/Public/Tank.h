@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "TankAimingComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Tank.generated.h" // Must be the last #include
 
 UCLASS()
@@ -17,6 +18,9 @@ public:
 	ATank();
 
 	void AimAt(FVector HitLocation);
+
+	UFUNCTION(BluePrintCallable, Category = Setup)
+		void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
 
 protected:
 	// Called when the game starts or when spawned
@@ -32,6 +36,8 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
+	UStaticMeshComponent * Barrel = nullptr;
 
-	
+	UPROPERTY(EditAnywhere, Category = Firing)
+		float LaunchSpeed = 100000; // TODO find sensible default
 };
