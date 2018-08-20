@@ -39,27 +39,27 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
 		UE_LOG(LogTemp, Warning, TEXT("No barrel found!"));
 		return;
 	}
-	else {
-		FVector OutLaunchVelocity = FVector(0.f, 0.f, 0.f);
-		FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
-		const TArray <AActor *> Dummy;
+	
+	FVector OutLaunchVelocity = FVector(0.f, 0.f, 0.f);
+	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
 
-		// Calculate the OutLaunchVelocity
-		if (UGameplayStatics::SuggestProjectileVelocity(
-			this,
-			OutLaunchVelocity,
-			StartLocation,
-			WorldSpaceAim,
-			LaunchSpeed,
-			false,
-			0,
-			0,
-			ESuggestProjVelocityTraceOption::DoNotTrace
-		)) {
-			auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-			UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDirection.ToString());
-		}
+	// Calculate the OutLaunchVelocity
+
+	if (UGameplayStatics::SuggestProjectileVelocity(
+		this,
+		OutLaunchVelocity,
+		StartLocation,
+		WorldSpaceAim,
+		LaunchSpeed,
+		false,
+		0,
+		0,
+		ESuggestProjVelocityTraceOption::DoNotTrace
+	)) {
+		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+		UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDirection.ToString());
 	}
+	
 }
 
 void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
