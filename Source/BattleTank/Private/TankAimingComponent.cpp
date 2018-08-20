@@ -45,7 +45,7 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
 		const TArray <AActor *> Dummy;
 
 		// Calculate the OutLaunchVelocity
-		UGameplayStatics::SuggestProjectileVelocity(
+		if (UGameplayStatics::SuggestProjectileVelocity(
 			this,
 			OutLaunchVelocity,
 			StartLocation,
@@ -55,10 +55,10 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
 			0,
 			0,
 			ESuggestProjVelocityTraceOption::DoNotTrace
-		);
-
-		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDirection.ToString());
+		)) {
+			auto AimDirection = OutLaunchVelocity.GetSafeNormal();
+			UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDirection.ToString());
+		}
 	}
 }
 
