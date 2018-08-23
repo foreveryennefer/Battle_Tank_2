@@ -32,6 +32,7 @@ void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed)
 		OutLaunchVelocity,
 		StartLocation,
 		WorldSpaceAim,
+
 		LaunchSpeed,
 		false,
 		0,

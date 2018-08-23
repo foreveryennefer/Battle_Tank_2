@@ -2,6 +2,7 @@
 
 #include "Tank.h"
 #include "../Public/Tank.h"
+#include "TankAimingComponent.h"
 
 
 // Sets default values
