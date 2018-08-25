@@ -59,7 +59,7 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection) {
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 	// Rotate the barrel socket as per the player's aim as a tick-component
 
-	Barrel->Elevate(5); // TODO remove magic number
+	Barrel->Elevate(1); // TODO remove magic number
 }
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)

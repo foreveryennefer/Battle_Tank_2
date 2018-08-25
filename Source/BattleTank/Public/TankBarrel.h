@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Components/StaticMeshComponent.h"
 #include "Engine/World.h"
+#include "Misc/App.h"
 #include "TankBarrel.generated.h"
 
 /**
@@ -17,18 +18,18 @@ class BATTLETANK_API UTankBarrel : public UStaticMeshComponent
 	
 public:
 	// -1 is max downward movement; +1 is max upward movemnet
-	void Elevate(float RelativeDegrees);
+	void Elevate(float RelativeSpeed);
 	
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxDegreePerSecond = 20;
+	float MaxDegreesPerSecond = 20;
 	
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxElevationDegrees = 40;
+	float MaxElevationDegrees = 40;
 
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MinElevationDegrees = 0;
+	float MinElevationDegrees = 0;
 
 	UPROPERTY(EditAnywhere, Category = Setup)
-		bool SelfCollision = false;
+	bool SelfCollision = false;
 };
