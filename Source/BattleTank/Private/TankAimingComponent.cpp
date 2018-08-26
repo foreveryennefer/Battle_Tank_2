@@ -71,7 +71,7 @@ void UTankAimingComponent::MoveTurret(FVector AimDirection)
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 	/*UE_LOG(LogTemp, Warning, TEXT("Relative Rotation Pitch: %f"), Turret->GetForwardVector()); */
-	Turret->Turn(5); // TODO remove magic number
+	Turret->Turn(DeltaRotator.Yaw); // TODO remove magic number
 }
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
