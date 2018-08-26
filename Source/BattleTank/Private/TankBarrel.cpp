@@ -4,6 +4,7 @@
 #include "BattleTank.h"
 
 /// Elevate the barrel within a bounded speedlimit and height
+
 void UTankBarrel::Elevate(float RelativeSpeed)
 {
 	// Bound the speed

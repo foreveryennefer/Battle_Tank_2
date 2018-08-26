@@ -9,6 +9,7 @@
 
 // Forward declarations
 class UTankBarrel;
+class UTankTurret;
 class UTankAimingComponent;
 
 UCLASS()
@@ -26,7 +27,7 @@ public:
 		void SetBarrelReference(UTankBarrel* BarrelToSet);
 
 	UFUNCTION(BluePrintCallable, Category = Setup)
-		void SetTurretlReference(UTankTurret * TurretToSet);
+		void SetTurretReference(UTankTurret * TurretToSet);
 
 protected:
 	// Called when the game starts or when spawned

@@ -67,20 +67,22 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection) {
 void UTankAimingComponent::MoveTurret(FVector AimDirection)
 {
 	// Get the rotation of the player's aim relative to the default
-	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto BarrelRotator = Turret->GetForwardVector().Rotation();
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
-
-	Turret->Turn(2); // TODO remove magic number
+	/*UE_LOG(LogTemp, Warning, TEXT("Relative Rotation Pitch: %f"), Turret->GetForwardVector()); */
+	Turret->Turn(5); // TODO remove magic number
 }
 
 void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
+	if (!BarrelToSet) { return; }
 	Barrel = BarrelToSet;
 }
 
 void UTankAimingComponent::SetTurretReference(UTankTurret * TurretToSet)
 {
+	if (!TurretToSet) { return; }
 	Turret = TurretToSet;
 }
 
