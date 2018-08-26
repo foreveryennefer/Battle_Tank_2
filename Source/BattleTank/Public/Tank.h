@@ -29,7 +29,7 @@ public:
 	UFUNCTION(BluePrintCallable, Category = Setup)
 		void SetTurretReference(UTankTurret * TurretToSet);
 
-	UFUNCTION(BluePrintCallable, Category = Setup)
+	UFUNCTION(BluePrintCallable, Category = Firing)
 		void Fire();
 
 protected:
