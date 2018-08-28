@@ -4,6 +4,10 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "GameFramework/Actor.h"
+#include "TankBarrel.h"
+#include "Projectile.h"
+#include "Engine/World.h"
 #include "Kismet/GameplayStatics.h"
 #include "Tank.generated.h" // Must be the last #include
 
@@ -11,6 +15,7 @@
 class UTankBarrel;
 class UTankTurret;
 class UTankAimingComponent;
+class AProjectile;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -46,4 +51,10 @@ public:
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)
 		float LaunchSpeed = 4000.0;
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+		TSubclassOf<AProjectile> ProjectileBluePrint;
+
+	// Local barrel reference for spawning projectile
+	UTankBarrel * Barrel = nullptr;
 };

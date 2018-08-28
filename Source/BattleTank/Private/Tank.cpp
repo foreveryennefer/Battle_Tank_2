@@ -37,6 +37,7 @@ void ATank::AimAt(FVector HitLocation)
 void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 {
 	TankAimingComponent->SetBarrelReference(BarrelToSet);
+	Barrel = BarrelToSet;
 }
 
 void ATank::SetTurretReference(UTankTurret * TurretToSet)
@@ -47,5 +48,12 @@ void ATank::SetTurretReference(UTankTurret * TurretToSet)
 void ATank::Fire()
 {
 	UE_LOG(LogTemp, Warning, TEXT("Tank is firing!"));
+	if (!Barrel) { return; }
+
+	GetWorld()->SpawnActor<AProjectile>(
+		ProjectileBluePrint, 
+		Barrel->GetSocketLocation(FName(TEXT("Projectile"))), 
+		Barrel->GetSocketRotation(FName(TEXT("Projectile")))
+	);
 }
 
