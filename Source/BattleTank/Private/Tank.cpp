@@ -13,6 +13,7 @@ ATank::ATank()
 
 	// No need to protect points as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+	/*ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement Component"));*/
 }
 
 // Called when the game starts or when spawned
@@ -50,10 +51,12 @@ void ATank::Fire()
 	UE_LOG(LogTemp, Warning, TEXT("Tank is firing!"));
 	if (!Barrel) { return; }
 
-	GetWorld()->SpawnActor<AProjectile>(
+	auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 		ProjectileBluePrint, 
 		Barrel->GetSocketLocation(FName(TEXT("Projectile"))), 
 		Barrel->GetSocketRotation(FName(TEXT("Projectile")))
 	);
+
+	Projectile->LaunchProjectile(LaunchSpeed);
 }
 

@@ -42,6 +42,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
+	/*UProjectileMovementComponent * ProjectileMovementComponent = nullptr;*/
 
 public:	
 
