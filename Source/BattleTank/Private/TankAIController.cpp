@@ -41,6 +41,7 @@ void ATankAIController::Tick(float DeltaTime)
 		GetAITank()->AimAt(PlayerLocation);
 
 		// Fire if ready
+		GetAITank()->Fire(); // TODO limit firing rate
 	}
 }
 
@@ -48,5 +49,7 @@ ATank* ATankAIController::GetAITank() const
 {
 	return Cast<ATank>(GetPawn());
 }
+
+
 
 
