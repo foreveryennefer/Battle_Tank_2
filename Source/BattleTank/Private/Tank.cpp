@@ -3,6 +3,7 @@
 #include "Tank.h"
 #include "../Public/Tank.h"
 #include "TankAimingComponent.h"
+#include "TankMovementComponent.h"
 
 
 // Sets default values
@@ -13,6 +14,7 @@ ATank::ATank()
 
 	// No need to protect points as added at construction
 	TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
+	/*TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));*/
 	/*ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement Component"));*/
 }
 
