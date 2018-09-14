@@ -5,13 +5,13 @@
 
 void UTankMovementComponent::Initialise(UTankTrack* TrackLeftToSet, UTankTrack* TrackRightToSet)
 {
-	if (!TrackLeftToSet || !TrackRightToSet){ return; }
 	TrackRight = TrackRightToSet;
 	TrackLeft = TrackLeftToSet;
 }
 
 void UTankMovementComponent::IntendMoveForward(float Throw) 
 {
+	if (!TrackLeft || !TrackRight) { return; }
 	TrackRight->SetThrottle(Throw);
 	TrackLeft->SetThrottle(Throw);
 
@@ -20,7 +20,7 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 
 void UTankMovementComponent::IntendTurnRight(float Throw)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Turning right, value: %f"), Throw)
+	if (!TrackLeft || !TrackRight) { return; }
 	TrackRight->SetThrottle(-Throw);
 	TrackLeft->SetThrottle(Throw);
 
