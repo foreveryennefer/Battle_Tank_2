@@ -12,8 +12,16 @@ void UTankMovementComponent::Initialise(UTankTrack* TrackLeftToSet, UTankTrack* 
 
 void UTankMovementComponent::IntendMoveForward(float Throw) 
 {
-	UE_LOG(LogTemp, Warning, TEXT("Intend move forward throw: %f"), Throw);
 	TrackRight->SetThrottle(Throw);
+	TrackLeft->SetThrottle(Throw);
+
+	//TODO prevent double speed due to dual-control use
+}
+
+void UTankMovementComponent::IntendTurnRight(float Throw)
+{
+	UE_LOG(LogTemp, Warning, TEXT("Turning right, value: %f"), Throw)
+	TrackRight->SetThrottle(-Throw);
 	TrackLeft->SetThrottle(Throw);
 
 	//TODO prevent double speed due to dual-control use

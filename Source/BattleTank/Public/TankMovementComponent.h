@@ -18,6 +18,9 @@ class BATTLETANK_API UTankMovementComponent : public UNavMovementComponent
 public:
 	UFUNCTION(BlueprintCallable, Category = Input)
 		void IntendMoveForward(float Throw);
+
+	UFUNCTION(BlueprintCallable, Category = Input)
+		void IntendTurnRight(float Throw);
 	
 	UPROPERTY(EditDefaultsOnly, Category = Setup)
 		float MyVariable = 4545.f;
