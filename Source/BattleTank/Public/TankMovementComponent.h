@@ -30,11 +30,11 @@ public:
 
 	UPROPERTY(EditDefaultsOnly)
 		float TrackMaxDrivingForce = 80000000.f; // Assume tank mass is 40 tonnes and 10 ms^-2
-
-	// TODO check best protection of this method
-	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
+	
 
 private:
+	// Called from the path-finding logic by the AI controllers
+	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 	UTankTrack* TrackLeft = nullptr;
 	UTankTrack* TrackRight = nullptr;
 };

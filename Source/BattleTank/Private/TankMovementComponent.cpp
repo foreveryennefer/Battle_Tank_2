@@ -17,7 +17,6 @@ void UTankMovementComponent::RequestDirectMove(const FVector & MoveVelocity, boo
 
 	auto TankForwardMovementComponent = FVector::DotProduct(TankForward, AIForwardIntention);
 	auto TankTurnComponent = FVector::CrossProduct(TankForward, AIForwardIntention);
-	UE_LOG(LogTemp, Warning, TEXT("%s is moving with forward throtte %f, and turn throttle %f"), *GetOwner()->GetName(), TankForwardMovementComponent, TankTurnComponent.Z)
 	IntendMoveForward(TankForwardMovementComponent);
 	IntendTurnRight(TankTurnComponent.Z);
 }
