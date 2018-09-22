@@ -29,43 +29,28 @@ public:
 
 	void AimAt(FVector HitLocation);
 
-	UFUNCTION(BluePrintCallable, Category = Setup)
-		void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BluePrintCallable, Category = Setup)
-		void SetTurretReference(UTankTurret * TurretToSet);
-
-	UFUNCTION(BluePrintCallable, Category = Firing)
+	UFUNCTION(BluePrintCallable, Category = "Firing")
 		void Fire();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
 	UPROPERTY(BluePrintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
+		UTankAimingComponent* TankAimingComponent = nullptr;
 
 	UPROPERTY(BluePrintReadOnly)
 		UTankMovementComponent* TankMovementComponent = nullptr;
-	/*UProjectileMovementComponent * ProjectileMovementComponent = nullptr;*/
-
-public:	
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 private:
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float LaunchSpeed = 4000.0;
 
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditAnywhere, Category = "Setup")
 		TSubclassOf<AProjectile> ProjectileBluePrint;
 
-	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float ReloadTimeInSeconds = 3.f;
 
 	// Local barrel reference for spawning projectile
-	UTankBarrel * Barrel = nullptr;
+	UTankBarrel * Barrel = nullptr; // TODO remove
 	
 	// Used Dummy used to calcualte the IsReloaded value
 	double LastFireTime = 0;

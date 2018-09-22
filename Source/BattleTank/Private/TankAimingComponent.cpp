@@ -16,6 +16,11 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
+void UTankAimingComponent::Initialise(UTankBarrel* TankBarrelToSet, UTankTurret* TankTurretToSet) {
+	Barrel = TankBarrelToSet;
+	Turret = TankTurretToSet;
+}
+
 void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed) 
 {
 	if (!Barrel) {
@@ -61,6 +66,7 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection) {
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 	// Rotate the barrel socket as per the player's aim as a tick-component
 
+	if (!Barrel) { return; }
 	Barrel->Elevate(DeltaRotator.Pitch);
 }
 
@@ -71,18 +77,7 @@ void UTankAimingComponent::MoveTurret(FVector AimDirection)
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
+	if (!Turret) { return; }
 	Turret->Turn(DeltaRotator.Yaw);
-}
-
-void UTankAimingComponent::SetBarrelReference(UTankBarrel * BarrelToSet)
-{
-	if (!BarrelToSet) { return; }
-	Barrel = BarrelToSet;
-}
-
-void UTankAimingComponent::SetTurretReference(UTankTurret * TurretToSet)
-{
-	if (!TurretToSet) { return; }
-	Turret = TurretToSet;
 }
 
