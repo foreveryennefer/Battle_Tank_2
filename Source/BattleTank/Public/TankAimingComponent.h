@@ -35,7 +35,7 @@ public:
 
 protected:
 	UPROPERTY(BluePrintReadOnly, Category = "Input")
-		EFiringStatus FiringStatus = EFiringStatus::Aiming;
+		EFiringStatus FiringStatus = EFiringStatus::Locked;
 
 private:
 	UTankAimingComponent();

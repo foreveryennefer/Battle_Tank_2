@@ -12,15 +12,21 @@ ATank::ATank()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = false;
 
-	// No need to protect pointers as added at construction
-	//TankAimingComponent = CreateDefaultSubobject<UTankAimingComponent>(FName("Aiming Component"));
-	/*TankMovementComponent = CreateDefaultSubobject<UTankMovementComponent>(FName("Movement Component"));*/
-	/*ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(FName("Projectile Movement Component"));*/
+	auto TankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s Black_Cat: Tank CPP Construct"), *TankName)
+}
+
+void ATank::BeginPlay()
+{
+	auto TankName = GetName();
+	UE_LOG(LogTemp, Warning, TEXT("%s Black_Cat: Tank CPP BeginPlay"), *TankName)
+	Super::BeginPlay(); // Needed for BP begin-play to run
 }
 
 void ATank::AimAt(FVector HitLocation)
 {
 	if (!TankAimingComponent) { return; }
+	UE_LOG(LogTemp, Warning, TEXT("Aiming Component found!"));
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 

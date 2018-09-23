@@ -24,7 +24,7 @@ void UTankAimingComponent::Initialise(UTankBarrel* TankBarrelToSet, UTankTurret*
 void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed) 
 {
 	if (!Barrel) {
-		UE_LOG(LogTemp, Warning, TEXT("No barrel found!"));
+		UE_LOG(LogTemp, Warning, TEXT("No barrel found!"))
 		return;
 	}
 	
