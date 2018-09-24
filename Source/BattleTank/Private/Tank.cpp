@@ -34,7 +34,7 @@ void ATank::Fire()
 {
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
 	if (!ensure(Barrel)) { return; }
-	if (Barrel && isReloaded) {
+	if (isReloaded) {
 		UE_LOG(LogTemp, Warning, TEXT("Tank is firing!"));
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
 			ProjectileBluePrint,
