@@ -23,7 +23,7 @@ void UTankAimingComponent::Initialise(UTankBarrel* TankBarrelToSet, UTankTurret*
 
 void UTankAimingComponent::AimAt(FVector WorldSpaceAim, float LaunchSpeed) 
 {
-	if (!Barrel) {
+	if (!ensure(Barrel)) {
 		UE_LOG(LogTemp, Warning, TEXT("No barrel found!"))
 		return;
 	}
@@ -66,7 +66,7 @@ void UTankAimingComponent::MoveBarrel(FVector AimDirection) {
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 	// Rotate the barrel socket as per the player's aim as a tick-component
 
-	if (!Barrel) { return; }
+	if (!ensure(Barrel)) { return; }
 	Barrel->Elevate(DeltaRotator.Pitch);
 }
 
@@ -77,7 +77,7 @@ void UTankAimingComponent::MoveTurret(FVector AimDirection)
 	auto AimAsRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
-	if (!Turret) { return; }
+	if (!ensure(Turret)) { return; }
 	Turret->Turn(DeltaRotator.Yaw);
 }
 

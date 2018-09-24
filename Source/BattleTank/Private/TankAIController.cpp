@@ -22,7 +22,7 @@ void ATankAIController::BeginPlay()
 ATank * ATankAIController::GetPlayerTank() const
 {
 	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-	if (!PlayerPawn) {
+	if (!ensure(PlayerPawn)) {
 		return nullptr;
 	}
 	else {

@@ -25,7 +25,7 @@ void ATank::BeginPlay()
 
 void ATank::AimAt(FVector HitLocation)
 {
-	if (!TankAimingComponent) { return; }
+	if (!ensure(TankAimingComponent)) { return; }
 	UE_LOG(LogTemp, Warning, TEXT("Aiming Component found!"));
 	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
@@ -33,7 +33,7 @@ void ATank::AimAt(FVector HitLocation)
 void ATank::Fire()
 {
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
-	if (!Barrel) { return; }
+	if (!ensure(Barrel)) { return; }
 	if (Barrel && isReloaded) {
 		UE_LOG(LogTemp, Warning, TEXT("Tank is firing!"));
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
