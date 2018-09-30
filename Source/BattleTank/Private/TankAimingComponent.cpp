@@ -81,3 +81,21 @@ void UTankAimingComponent::MoveTurret(FVector AimDirection)
 	Turret->Turn(DeltaRotator.Yaw);
 }
 
+void UTankAimingComponent::Fire()
+{
+	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeInSeconds;
+	if (!ensure(Barrel && ProjectileBluePrint)) { return; }
+	if (isReloaded) {
+		UE_LOG(LogTemp, Warning, TEXT("Tank is firing!"));
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+			ProjectileBluePrint,
+			Barrel->GetSocketLocation(FName(TEXT("Projectile"))),
+			Barrel->GetSocketRotation(FName(TEXT("Projectile")))
+			);
+
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastFireTime = FPlatformTime::Seconds();
+	}
+
+}
+

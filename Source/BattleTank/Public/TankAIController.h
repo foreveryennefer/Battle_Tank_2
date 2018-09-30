@@ -11,7 +11,6 @@
 #include "TankAIController.generated.h"
 
 // Forward declaration
-class ATank;
 class UTankAimingComponent;
 /**
  * 

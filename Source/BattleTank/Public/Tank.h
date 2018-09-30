@@ -12,37 +12,13 @@
 #include "Tank.generated.h" // Must be the last #include
 
 // Forward declarations
-class UTankBarrel;
-class UTankTurret;
-class AProjectile;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
 {
 	GENERATED_BODY()
 
-public:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	UFUNCTION(BluePrintCallable, Category = "Firing")
-		void Fire();
-
-private:
-	virtual void BeginPlay() override;
-
-	UPROPERTY(EditAnywhere, Category = "Setup")
-		TSubclassOf<AProjectile> ProjectileBluePrint;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float ReloadTimeInSeconds = 3.f;
-
-	// Local barrel reference for spawning projectile
-	UTankBarrel * Barrel = nullptr; // TODO remove
-	
-	// Used Dummy used to calcualte the IsReloaded value
-	double LastFireTime = 0;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float LaunchSpeed = 4000.0;
 };
