@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AIController.h"
+#include "TankAimingComponent.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/PlayerController.h"
 #include "Engine/World.h"
@@ -11,6 +12,7 @@
 
 // Forward declaration
 class ATank;
+class UTankAimingComponent;
 /**
  * 
  */
@@ -24,8 +26,6 @@ public:
 private:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-	ATank * GetAITank() const;
-	ATank* GetPlayerTank() const;
 
 	// How close can the AI tank get to player
 	float AcceptanceRadius = 3000.f;

@@ -14,7 +14,6 @@
 // Forward declarations
 class UTankBarrel;
 class UTankTurret;
-class UTankAimingComponent;
 class AProjectile;
 
 UCLASS()
@@ -26,20 +25,11 @@ public:
 	// Sets default values for this pawn's properties
 	ATank();
 
-	void AimAt(FVector HitLocation);
-
 	UFUNCTION(BluePrintCallable, Category = "Firing")
 		void Fire();
 
-protected:
-	UPROPERTY(BluePrintReadOnly)
-		UTankAimingComponent* TankAimingComponent = nullptr;
-
 private:
 	virtual void BeginPlay() override;
-
-	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float LaunchSpeed = 4000.0;
 
 	UPROPERTY(EditAnywhere, Category = "Setup")
 		TSubclassOf<AProjectile> ProjectileBluePrint;
@@ -52,4 +42,7 @@ private:
 	
 	// Used Dummy used to calcualte the IsReloaded value
 	double LastFireTime = 0;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		float LaunchSpeed = 4000.0;
 };

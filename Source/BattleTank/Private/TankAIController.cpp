@@ -2,14 +2,13 @@
 
 #include "TankAIController.h"
 #include "../Public/TankAIController.h"
-#include "Tank.h"
 // Depends on movement component via pathfinding system
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 	UE_LOG(LogTemp, Warning, TEXT("AIController Begin Play"));
-	auto PlayerTank = GetPlayerTank();
+	auto PlayerTank = GetPawn();
 
 	if (ensure(PlayerTank))
 	{
@@ -20,37 +19,27 @@ void ATankAIController::BeginPlay()
 	}
 }
 
-ATank * ATankAIController::GetPlayerTank() const
-{
-	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
-	if (!ensure(PlayerPawn)) {
-		return nullptr;
-	}
-	else {
-		return Cast<ATank>(PlayerPawn);
-	}
-}
-
 void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (GetPlayerTank()) {
-		// Move towards the player
-		MoveToActor(GetPlayerTank(), AcceptanceRadius); // TODO check radius is in cm
+	
+	auto AimingComponent = GetPawn()->FindComponentByClass<UTankAimingComponent>();
+	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+	auto ControlledTank = GetPawn();
 
-		// Aim towards the player
-		FVector PlayerLocation = GetPlayerTank()->GetActorLocation();
-		GetAITank()->AimAt(PlayerLocation);
+	if (!ensure(AimingComponent || PlayerTank || ControlledTank)) { return; }
+	// Move towards the player
+	MoveToActor(PlayerTank, AcceptanceRadius); // TODO check radius is in cm
 
-		// Fire if ready
-		GetAITank()->Fire(); // TODO limit firing rate
-	}
+	// Aim towards the player
+	FVector PlayerLocation = PlayerTank->GetActorLocation();
+	AimingComponent->AimAt(PlayerLocation);
+
+	// Fire if ready
+	//AimingComponent->Fire(); // TODO limit firing rate
+	
 }
 
-ATank* ATankAIController::GetAITank() const
-{
-	return Cast<ATank>(GetPawn());
-}
 
 
 

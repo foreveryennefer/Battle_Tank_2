@@ -31,7 +31,7 @@ public:
 	UFUNCTION(BluePrintCallable, Category = "Setup")
 		void Initialise(UTankBarrel* TankBarrelToSet, UTankTurret* TankTurretToSet);
 
-	void AimAt(FVector WorldSpaceAim, float LaunchSpeed);
+	void AimAt(FVector WorldSpaceAim);
 
 protected:
 	UPROPERTY(BluePrintReadOnly, Category = "Input")
@@ -44,4 +44,6 @@ private:
 	void MoveBarrel(FVector AimDirection);
 	void MoveTurret(FVector AimDirection);
 
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		float LaunchSpeed = 4000.0;
 };

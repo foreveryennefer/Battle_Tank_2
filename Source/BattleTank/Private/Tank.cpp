@@ -2,7 +2,6 @@
 
 #include "Tank.h"
 #include "../Public/Tank.h"
-#include "TankAimingComponent.h"
 
 
 // Sets default values
@@ -20,16 +19,14 @@ void ATank::BeginPlay()
 	auto TankName = GetName();
 	UE_LOG(LogTemp, Warning, TEXT("%s Black_Cat: Tank CPP BeginPlay"), *TankName)
 	Super::BeginPlay(); // Needed for BP begin-play to run
-
-	TankAimingComponent = FindComponentByClass<UTankAimingComponent>();
 }
 
-void ATank::AimAt(FVector HitLocation)
-{
-	if (!ensure(TankAimingComponent)) { return; }
-	UE_LOG(LogTemp, Warning, TEXT("Aiming Component found!"));
-	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
-}
+//void ATank::AimAt(FVector HitLocation)
+//{
+//	if (!ensure(TankAimingComponent)) { return; }
+//	UE_LOG(LogTemp, Warning, TEXT("Aiming Component found!"));
+//	TankAimingComponent->AimAt(HitLocation, LaunchSpeed);
+//}
 
 void ATank::Fire()
 {
