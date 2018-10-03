@@ -39,11 +39,15 @@ public:
 		void Fire();
 
 protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
+
 	UPROPERTY(BluePrintReadOnly, Category = "Input")
-		EFiringStatus FiringStatus = EFiringStatus::Locked;
+		EFiringStatus FiringStatus = EFiringStatus::Reloading;
 
 private:
 	UTankAimingComponent();
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
 	UTankBarrel * Barrel = nullptr;
 	UTankTurret * Turret = nullptr;
 	void MoveBarrel(FVector AimDirection);
