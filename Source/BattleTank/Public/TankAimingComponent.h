@@ -6,6 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Math/Vector.h"
 #include "Projectile.h"
 #include "TankAimingComponent.generated.h" // Last include
 
@@ -52,6 +53,7 @@ private:
 	UTankTurret * Turret = nullptr;
 	void MoveBarrel(FVector AimDirection);
 	void MoveTurret(FVector AimDirection);
+	bool IsBarrelMoving();
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float LaunchSpeed = 4000.0;
@@ -64,4 +66,6 @@ private:
 
 	// Used Dummy used to calcualte the IsReloaded value
 	double LastFireTime = 0;
+
+	FVector AimDirection;
 };
