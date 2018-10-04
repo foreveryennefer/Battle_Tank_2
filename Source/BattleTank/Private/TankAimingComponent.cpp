@@ -23,12 +23,7 @@ void UTankAimingComponent::BeginPlay() {
 
 void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction * ThisTickFunction)
 {
-	if (IsBarrelMoving()) {
-		UE_LOG(LogTemp, Warning, TEXT("Barrel is moving!"))
-	}
-	else {
-		UE_LOG(LogTemp, Warning, TEXT("Not moving!"))
-	}
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	if ((FPlatformTime::Seconds() - LastFireTime) < ReloadTimeInSeconds)
 	{
