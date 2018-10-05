@@ -14,6 +14,18 @@ UTankTrack::UTankTrack()
 	PrimaryComponentTick.bCanEverTick = false;
 }
 
+void UTankTrack::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit)
+{
+	UE_LOG(LogTemp, Warning, TEXT("I'm hit!"))
+	// Drive the tracks
+	DriveTrack();
+	
+	//Apply sideways force
+	ApplySidewayForce();
+
+	CurrentThrottle = 0.f;
+}
+
 void UTankTrack::ApplySidewayForce()
 {
 	auto SlippageSpeed = FVector::DotProduct(GetComponentVelocity(), GetRightVector()); //Float
@@ -30,20 +42,19 @@ void UTankTrack::ApplySidewayForce()
 	UE_LOG(LogTemp, Warning, TEXT("%s"), *GetRightVector().ToString())
 }
 
-void UTankTrack::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit)
+void UTankTrack::DriveTrack()
 {
-	// Drive the tracks
-	ApplySidewayForce();
-	//Apply sideways force
-
+	// TODO clamp actual throttle value so player cannot over-drive
+	FVector ForceApplied = GetForwardVector() * CurrentThrottle * TrackMaxDrivingForce;
+	auto ForceLocation = GetComponentLocation();
+	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
+	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
+	UE_LOG(LogTemp, Warning, TEXT("Force applied: %s"), *ForceApplied.ToString())
 }
 
 void UTankTrack::SetThrottle(float throttle)
 {
-	// TODO clamp actual throttle value so player cannot over-drive
-	FVector ForceApplied = GetForwardVector() * throttle * TrackMaxDrivingForce;
-	auto ForceLocation = GetComponentLocation();
-	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
-	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
+	CurrentThrottle = FMath::Clamp<float>(CurrentThrottle + throttle, -1, 1);
+	//UE_LOG(LogTemp, Warning, TEXT("Throttle: %f"), CurrentThrottle)
 }
 
