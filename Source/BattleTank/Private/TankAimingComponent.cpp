@@ -101,7 +101,22 @@ void UTankAimingComponent::MoveTurret(FVector AimDirection)
 	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
 	if (!ensure(Turret)) { return; }
-	Turret->Turn(DeltaRotator.Yaw);
+	/// Always find the shortest rotation possible
+	if (DeltaRotator.Yaw > 180)
+	{
+		Turret->Turn(-(360-DeltaRotator.Yaw));
+		UE_LOG(LogTemp, Warning, TEXT("Standard: %f"), DeltaRotator.Yaw)
+	}
+	else if (DeltaRotator.Yaw < -180)
+	{
+		Turret->Turn(-(DeltaRotator.Yaw - 360));
+		UE_LOG(LogTemp, Warning, TEXT("Turning the other way: %f"), DeltaRotator.Yaw)
+	}
+	else
+	{
+		Turret->Turn(DeltaRotator.Yaw);
+		UE_LOG(LogTemp, Warning, TEXT("Standard turn: %f"), DeltaRotator.Yaw)
+	}
 }
 
 bool UTankAimingComponent::IsBarrelMoving()

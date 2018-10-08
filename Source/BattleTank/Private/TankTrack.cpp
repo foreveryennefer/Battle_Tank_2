@@ -16,7 +16,7 @@ UTankTrack::UTankTrack()
 
 void UTankTrack::OnHit(UPrimitiveComponent * HitComponent, AActor * OtherActor, UPrimitiveComponent * OtherComponent, FVector NormalImpulse, const FHitResult & Hit)
 {
-	UE_LOG(LogTemp, Warning, TEXT("I'm hit!"))
+	//UE_LOG(LogTemp, Warning, TEXT("I'm hit!"))
 	// Drive the tracks
 	DriveTrack();
 	
@@ -39,7 +39,7 @@ void UTankTrack::ApplySidewayForce()
 	auto TankRoot = Cast<UStaticMeshComponent>(GetOwner()->GetRootComponent());
 	auto CorrectionForce = (TankRoot->GetMass() * CorrectionAcceleration) / 2; //Two tracks
 	TankRoot->AddForce(CorrectionForce);
-	UE_LOG(LogTemp, Warning, TEXT("%s"), *GetRightVector().ToString())
+	//UE_LOG(LogTemp, Warning, TEXT("%s"), *GetRightVector().ToString())
 }
 
 void UTankTrack::DriveTrack()
@@ -49,7 +49,7 @@ void UTankTrack::DriveTrack()
 	auto ForceLocation = GetComponentLocation();
 	auto TankRoot = Cast<UPrimitiveComponent>(GetOwner()->GetRootComponent());
 	TankRoot->AddForceAtLocation(ForceApplied, ForceLocation);
-	UE_LOG(LogTemp, Warning, TEXT("Force applied: %s"), *ForceApplied.ToString())
+	//UE_LOG(LogTemp, Warning, TEXT("Force applied: %s"), *ForceApplied.ToString())
 }
 
 void UTankTrack::SetThrottle(float throttle)
