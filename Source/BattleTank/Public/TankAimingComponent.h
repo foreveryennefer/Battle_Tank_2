@@ -16,7 +16,8 @@ enum class EFiringStatus : uint8
 {
 	Locked,
 	Reloading,
-	Aiming
+	Aiming,
+	OutOfAmmo
 };
 
 // Forward Declaration
@@ -40,6 +41,9 @@ public:
 		void Fire();
 
 	EFiringStatus GetFiringStatus() const;
+
+	UFUNCTION(BluePrintCallable, Category = "Input")
+		int GetRoundsLeft() const;
 
 protected:
 	// Called when the game starts or when spawned
@@ -70,4 +74,6 @@ private:
 	double LastFireTime = 0;
 
 	FVector AimDirection;
+
+	int RoundsLeft = 3;
 };
