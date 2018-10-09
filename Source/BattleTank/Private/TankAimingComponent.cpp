@@ -39,6 +39,11 @@ void UTankAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, F
 	}
 }
 
+EFiringStatus UTankAimingComponent::GetFiringStatus() const
+{
+	return FiringStatus;
+}
+
 void UTankAimingComponent::Initialise(UTankBarrel* TankBarrelToSet, UTankTurret* TankTurretToSet) {
 	Barrel = TankBarrelToSet;
 	Turret = TankTurretToSet;
@@ -145,4 +150,6 @@ void UTankAimingComponent::Fire()
 	}
 
 }
+
+
 
