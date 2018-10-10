@@ -163,10 +163,6 @@ void UTankAimingComponent::Fire()
 
 	}
 
-	if (GetRoundsLeft() != 0)
-	{
-		RoundsLeft -= 1;
-	}
 }
 
 
