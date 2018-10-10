@@ -7,6 +7,8 @@
 #include "GameFramework/Pawn.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/ActorComponent.h"
+#include "Components/StaticMeshComponent.h"
+#include "Particles/ParticleSystemComponent.h"
 #include "UObject/Object.h"
 #include "Engine/World.h"
 #include "Projectile.generated.h"
@@ -34,4 +36,9 @@ public:
 private: 
 	UProjectileMovementComponent * ProjectileMovement = nullptr;
 	
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		UStaticMeshComponent * CollisionMesh = nullptr;
+
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+		UParticleSystemComponent * LaunchBlast = nullptr;
 };

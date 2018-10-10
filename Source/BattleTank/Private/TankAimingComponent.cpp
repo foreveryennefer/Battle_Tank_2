@@ -48,7 +48,7 @@ EFiringStatus UTankAimingComponent::GetFiringStatus() const
 	return FiringStatus;
 }
 
-int UTankAimingComponent::GetRoundsLeft() const
+int32 UTankAimingComponent::GetRoundsLeft() const
 {
 	return RoundsLeft;
 }
@@ -154,8 +154,13 @@ void UTankAimingComponent::Fire()
 			Barrel->GetSocketRotation(FName(TEXT("Projectile")))
 			);
 
-		Projectile->LaunchProjectile(LaunchSpeed);
-		LastFireTime = FPlatformTime::Seconds();
+		if (GetRoundsLeft() != 0)
+		{
+			Projectile->LaunchProjectile(LaunchSpeed);
+			LastFireTime = FPlatformTime::Seconds();
+			RoundsLeft -= 1;
+		}
+
 	}
 
 	if (GetRoundsLeft() != 0)

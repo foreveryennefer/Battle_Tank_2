@@ -43,7 +43,7 @@ public:
 	EFiringStatus GetFiringStatus() const;
 
 	UFUNCTION(BluePrintCallable, Category = "Input")
-		int GetRoundsLeft() const;
+		int32 GetRoundsLeft() const;
 
 protected:
 	// Called when the game starts or when spawned
@@ -70,10 +70,11 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 		float ReloadTimeInSeconds = 3.f;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+		int32 RoundsLeft = 3;
+
 	// Used Dummy used to calcualte the IsReloaded value
 	double LastFireTime = 0;
 
 	FVector AimDirection;
-
-	int RoundsLeft = 3;
 };
